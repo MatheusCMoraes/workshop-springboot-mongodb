@@ -1,5 +1,7 @@
 package com.nelioalves.workshopmongo.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +15,8 @@ public class PostService {
 	@Autowired
 	private PostRepository repo;
 
-	public Post findById(String id) {
-
-		Post post = repo.findById(id).orElse(null);
-		// uso do orElse por conta da implementação interna do Optional
-
-		if (post == null) {
-
-			throw new ObjectNotFoundException("Objeto não encontrado.");
-		}
-
-		return post;
-
-	}
+    public Post findById(String id) {
+        Optional<Post> user = repo.findById(id);
+        return user.orElseThrow(() -> new ObjectNotFoundException("Post não encontrado"));
+    }	
 }
