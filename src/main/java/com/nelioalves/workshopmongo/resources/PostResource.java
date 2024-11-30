@@ -39,7 +39,7 @@ public class PostResource  {
 		
 		text = URL.decodeParam(text);
 		
-		List<Post> list = service.findByTitle(text);
+		List<Post> list = service.searchTitle(text);
 		return ResponseEntity.ok().body(list);
 		
 	}
